@@ -2,10 +2,13 @@
 import rawpy
 import numpy as np 
 from PIL import Image 
+import pandas as pd 
 
 # %%
 
-raw_data = rawpy.imread('DSC_0002.NEF')
+file = 'DSC_0002.NEF'
+
+raw_data = rawpy.imread(file)
 
 img = Image.fromarray(raw_data.postprocess())
 # %%
@@ -13,8 +16,21 @@ img = Image.fromarray(raw_data.postprocess())
 img = img.resize([100,100])
 # %%
 
-img_arr = np.asarray(img)
+## Convert to rgb hisogram.
+
+r, g, b = img.split()
+
+r = r.histogram()
+g = g.histogram()
+b = b.histogram()
 # %%
 
-img_arr_flat = img_arr.flatten()
+image_series = pd.concat([
+    pd.Series(r, index=['red_' + str(i) for i in range(256)]),
+    pd.Series(g, index=['green_' + str(i) for i in range(256)]),
+    pd.Series(b, index=['blue_' + str(i) for i in range(256)])
+])
+
+df = pd.DataFrame(image_series).transpose()
+df.index = [file.split('.')[0]]
 # %%
