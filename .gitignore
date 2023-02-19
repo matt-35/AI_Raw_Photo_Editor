@@ -3,3 +3,4 @@
 *.xmp
 *.csv
 .DS_Store
+*.pyc
