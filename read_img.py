@@ -28,7 +28,7 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
     ])
 
     df = pd.DataFrame(image_series).transpose()
-    df.index = [file.split('.')[0]]
+    df.index = [file_name.split('/')[-1].split('.')[0]]
 
     return df 
 
