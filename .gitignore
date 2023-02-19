@@ -1,3 +1,5 @@
+*.CR2
+*.NEF
 *.xmp
 *.csv
 .DS_Store
