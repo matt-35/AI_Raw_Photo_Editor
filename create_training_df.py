@@ -11,7 +11,7 @@ from read_xmp import read_xmp
 # %%
 if __name__ == '__main__':
 
-    training_path = 'training_images/'
+    training_path = 'training_images/Worship/'
 
     raw_images = glob(f'{training_path}/*.NEF') + glob(f'{training_path}/*.CR2')
     xmp_files = glob(f'{training_path}/*.xmp')
@@ -28,6 +28,6 @@ if __name__ == '__main__':
  
     training_df = img_hist_df.join(xmp_df)
 
-    training_df.to_csv('training_data/image_data.csv')
+    training_df.to_csv('training_data/image_data_worship.csv')
 
 # %%

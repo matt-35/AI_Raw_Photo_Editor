@@ -11,7 +11,7 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
     img = Image.fromarray(raw_data.postprocess())
 
     # Resize image
-    img = img.resize([500,500])
+    img = img.resize([1000,1000])
 
     ## Convert to rgb hisogram.
     r, g, b = img.split()
@@ -29,6 +29,11 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
 
     df = pd.DataFrame(image_series).transpose()
     df.index = [file_name.split('/')[-1].split('.')[0]]
+
+    if file_name.endswith('.NEF'):
+        df['camera'] = 'Nikon'
+    elif file_name.endswith('.CR2'): 
+        df['camera'] = 'Canon'
 
     return df 
 
