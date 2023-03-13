@@ -28,5 +28,5 @@ if __name__ == '__main__':
 
     training_df = img_arr_df.join(xmp_df)
 
-    training_df.to_csv('training_data/image_arr_worship.csv')
+    training_df.to_hdf('training_data/image_arr_worship.h5', key='training_df')
 # %%
