@@ -13,7 +13,15 @@ if __name__ == '__main__':
 
     training_path = 'training_images/Worship/'
 
-    raw_images = glob(f'{training_path}/*.NEF') + glob(f'{training_path}/*.CR2')
+    raw_images = glob(f'{training_path}/*.NEF')\
+        + glob(f'{training_path}/*.nef')\
+        + glob(f'{training_path}/*.CR2')\
+        + glob(f'{training_path}/*.CR3')\
+        + glob(f'{training_path}/*.cr2')\
+        + glob(f'{training_path}/*.cr3')\
+        + glob(f'{training_path}/*.arw')\
+        + glob(f'{training_path}/*.ARW')
+
     xmp_files = glob(f'{training_path}/*.xmp')
 
     ## Read raw images.
@@ -28,5 +36,5 @@ if __name__ == '__main__':
 
     training_df = img_arr_df.join(xmp_df)
 
-    training_df.to_hdf('training_data/image_arr_worship.h5', key='training_df')
+    training_df.to_hdf('training_data/image_arr.h5', key='training_df')
 # %%

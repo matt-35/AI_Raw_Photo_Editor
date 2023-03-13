@@ -38,7 +38,7 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
 
     return df 
 
-def image_to_array(file_name:str, img_size:int=500):
+def image_to_array(file_name:str, img_size:int=250):
 
     raw_data = rawpy.imread(file_name)
     img = Image.fromarray(raw_data.postprocess())
