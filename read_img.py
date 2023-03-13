@@ -3,6 +3,7 @@ import rawpy
 import numpy as np 
 from PIL import Image 
 import pandas as pd 
+from typing import Tuple
 
 def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
 
@@ -47,7 +48,12 @@ def image_to_array(file_name:str, img_size:int=500):
 
     img_arr = np.asarray(img)
 
-    return img_arr
+    img_name = file_name.split('.')[0]
+
+    df = pd.DataFrame({'img_arr':[img_arr]})
+    df.index = [file_name.split('/')[-1].split('.')[0]]
+
+    return df
 
 # %%
 if __name__ == '__main__':
