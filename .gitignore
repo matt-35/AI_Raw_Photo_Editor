@@ -6,3 +6,4 @@
 *.pyc
 .ipynb_checkpoints
 Lightroom
+training_data/*.h5
