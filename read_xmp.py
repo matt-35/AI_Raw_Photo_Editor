@@ -25,17 +25,20 @@ def read_xmp(file_name:str) -> pd.DataFrame:
     ## Testing this to remove duplicate columns
     df = df.drop_duplicates(subset=[0], keep='first')
 
-    df[1] = df[1].astype(np.float64)
+    try:
+        df[1] = df[1].astype(np.float64)
 
-    df = df.set_index(0).transpose()
+        df = df.set_index(0).transpose()
 
-    df = df.drop(columns='')
+        df = df.drop(columns='')
 
-    index_name = file_name.split('/')[-1].replace('.xmp','')
+        index_name = file_name.split('/')[-1].replace('.xmp','')
 
-    df.index = [index_name]
+        df.index = [index_name]
 
-    return df
+        return df
+    except:
+        return None
 
 # %%
 
