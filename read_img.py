@@ -9,7 +9,7 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
 
     raw_data = rawpy.imread(file_name)
     # Convert raw into readable array.
-    img = Image.fromarray(raw_data.postprocess())
+    img = Image.fromarray(raw_data.postprocess(use_camera_wb=True, no_auto_bright=True))
 
     # Resize image
     img = img.resize([1000,1000])
@@ -41,7 +41,7 @@ def convert_img_to_df_histogram(file_name:str) -> pd.DataFrame:
 def image_to_array(file_name:str, img_size:int=250):
 
     raw_data = rawpy.imread(file_name)
-    img = Image.fromarray(raw_data.postprocess())
+    img = Image.fromarray(raw_data.postprocess(use_camera_wb=True, no_auto_bright=True))
 
     # Resize image
     img = img.resize([img_size,img_size])
