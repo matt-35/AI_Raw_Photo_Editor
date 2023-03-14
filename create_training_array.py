@@ -11,18 +11,18 @@ from read_xmp import read_xmp
 # %%
 if __name__ == '__main__':
 
-    training_path = 'training_images/Worship/'
+    training_path = '/Volumes/SSD500/Mercy Raws/'
 
-    raw_images = glob(f'{training_path}/*.NEF')\
-        + glob(f'{training_path}/*.nef')\
-        + glob(f'{training_path}/*.CR2')\
-        + glob(f'{training_path}/*.CR3')\
-        + glob(f'{training_path}/*.cr2')\
-        + glob(f'{training_path}/*.cr3')\
-        + glob(f'{training_path}/*.arw')\
-        + glob(f'{training_path}/*.ARW')
+    raw_images = glob(f'{training_path}/**/*.NEF', recursive=True)\
+        + glob(f'{training_path}/**/*.nef', recursive=True)\
+        + glob(f'{training_path}/**/*.CR2', recursive=True)\
+        + glob(f'{training_path}/**/*.CR3', recursive=True)\
+        + glob(f'{training_path}/**/*.cr2', recursive=True)\
+        + glob(f'{training_path}/**/*.cr3', recursive=True)\
+        + glob(f'{training_path}/**/*.arw', recursive=True)\
+        + glob(f'{training_path}/**/*.ARW', recursive=True)
 
-    xmp_files = glob(f'{training_path}/*.xmp')
+    xmp_files = glob(f'{training_path}/**/*.xmp', recursive=True)
 
     ## Read raw images.
     img_arr_df = pd.concat(
@@ -35,6 +35,10 @@ if __name__ == '__main__':
     )
 
     training_df = img_arr_df.join(xmp_df)
+
+    training_df = training_df.sample(frac=1)
+
+    training_df = training_df.dropna(subset=['crs:Temperature'])
 
     training_df.to_hdf('training_data/image_arr.h5', key='training_df')
 # %%
